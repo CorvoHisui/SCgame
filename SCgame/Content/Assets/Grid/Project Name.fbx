@@ -1,0 +1,174 @@
+; FBX 7.3.0 project file
+; ----------------------------------------------------
+
+FBXHeaderExtension: {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7300
+	CreationTimeStamp: {
+		Version: 1000
+		Year: 2023
+		Month: 9
+		Day: 25
+		Hour: 16
+		Minute: 42
+		Second: 27
+		Millisecond: 724
+	}
+	Creator: "Vectary"
+	SceneInfo: {
+		Type: "UserData"
+		Version: 100
+		MetaData: {
+			Version: 100
+			Title: "Project Name"
+			Subject: ""
+			Author: "corvo.hisui"
+			Keywords: ""
+			Revision: ""
+			Comment: ""
+		}
+	}
+}
+GlobalSettings: {
+	Version: 1000
+	Properties70: {
+		P: "UpAxis", "int", "Integer", "", 2
+		P: "UpAxisSign", "int", "Integer", "", 1
+		P: "FrontAxis", "int", "Integer", "", 1
+		P: "FrontAxisSign", "int", "Integer", "", -1
+		P: "CoordAxis", "int", "Integer", "", 0
+		P: "CoordAxisSign", "int", "Integer", "", 1
+		P: "OriginalUpAxis", "int", "Integer", "", 1
+		P: "OriginalUpAxisSign", "int", "Integer", "", 1
+		P: "UnitScaleFactor", "double", "Number", "", 0.1
+		P: "OriginalUnitScaleFactor", "double", "Number", "", 1
+	}
+}
+
+; Documents Description
+; ----------------------------------------------------
+
+Documents: {
+	Count: 1
+	Document: 1000003, undefined {
+		RootNode: 0
+	}
+}
+
+; Object definitions
+; ----------------------------------------------------
+
+Definitions: {
+	Version: 100
+	Count: 4
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "Model" {
+		Count: 1
+	}
+	ObjectType: "Geometry" {
+		Count: 1
+	}
+	ObjectType: "Material" {
+		Count: 1
+	}
+	ObjectType: "Texture" {
+		Count: 0
+	}
+	ObjectType: "Video" {
+		Count: 0
+	}
+}
+
+; Object properties
+; ----------------------------------------------------
+
+Objects: {
+	Model: 1000000, "Model::Plane", "Mesh" {
+		Version: 232
+		Properties70: {
+			P: "InheritType", "enum", "", "", 1
+			P: "DefaultAttributeIndex", "int", "Integer", "", 0
+			P: "Lcl Translation", "Lcl Translation", "", "A", 0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A", 0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A", 1,1,1
+		}
+	}
+	Geometry: 1000001, "Geometry::Plane", "Mesh" {
+		GeometryVersion: 124
+		Vertices: *12 {
+			a: 50,50,0,-50,50,0,-50,-50,0,50,-50,0
+		}
+		PolygonVertexIndex: *4 {
+			a: 0,1,2,-4
+		}
+		LayerElementNormal: 0 {
+			Version: 100
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *12 {
+				a: 0,0,1,0,0,1,0,0,1,0,0,1
+			}
+		}
+		LayerElementUV: 0 {
+			Version: 100
+			Name: "UVChannel_1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *8 {
+				a: 1,1,0,1,0,0,1,0
+			}
+			UVIndex: *4 {
+				a: 0,1,2,3
+			}
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement: {
+				Type: "LayerElementNormal"
+				TypedIdx: 0
+			}
+			LayerElement: {
+				Type: "LayerElementUV"
+				TypedIdx: 0
+			}
+		}
+	}
+	Material: 1000002, "Material::Free Spirit", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70: {
+			P: "EmissiveColor", "Color", "", "A", 1,1,1
+			P: "EmissiveFactor", "Number", "", "A", 0
+			P: "DiffuseColor", "Color", "", "A", 0.9372,0.9372,0.9372
+			P: "DiffuseFactor", "Number", "", "A", 0.96
+			P: "Opacity", "Number", "", "A", 1
+			P: "TransparentColor", "Color", "", "A", 1,1,1
+			P: "TransparencyFactor", "Number", "", "A", 0
+			P: "SpecularColor", "Number", "", "A", 1,1,1
+			P: "SpecularFactor", "Number", "", "A", 0.04
+			P: "ShininessExponent", "Number", "", "A", 244.79999999999998
+			P: "NormalFactor", "Number", "", "A", 0
+			P: "RoughnessFactor", "Number", "", "A", 0.2
+			P: "MetallicFactor", "Number", "", "A", 0
+		}
+	}
+}
+
+; Object connections
+; ----------------------------------------------------
+
+Connections: {
+
+	; Geometry::Plane, Model::Plane
+	C: "OO",1000001,1000000
+
+	; Material::Free Spirit, Model::Plane
+	C: "OO",1000002,1000000
+
+	; Model::Plane, Model::RootNode
+	C: "OO",1000000,0
+}
