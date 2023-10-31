@@ -2,13 +2,13 @@
 
 using UnrealBuildTool;
 
-public class MyProject : ModuleRules
+public class SC_Project : ModuleRules
 {
-	public MyProject(ReadOnlyTargetRules Target) : base(Target)
+	public SC_Project(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "PaperZD", "Paper2D" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
