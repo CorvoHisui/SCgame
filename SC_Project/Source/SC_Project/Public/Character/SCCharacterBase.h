@@ -14,4 +14,15 @@ class SC_PROJECT_API ASCCharacterBase : public APaperZDCharacter
 {
 	GENERATED_BODY()
 
+public:
+	ASCCharacterBase();
+
+protected:
+	virtual void BeginPlay() override;
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
