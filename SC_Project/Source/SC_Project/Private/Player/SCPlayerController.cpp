@@ -5,6 +5,7 @@
 
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Character/SCCharacter.h"
 
 ASCPlayerController::ASCPlayerController()
 {
@@ -49,8 +50,12 @@ void ASCPlayerController::Move(const FInputActionValue& InputActionValue)
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 
 	if (APawn* ControlledPawn = GetPawn<APawn>()) {
-		ControlledPawn->AddMovementInput(-FowardDirection, InputAxisVector.Y);
-		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+		if (!isMovementLocked) {
+			ControlledPawn->AddMovementInput(-FowardDirection, InputAxisVector.Y);
+			ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+		}
 	}
+
+	Cast<ASCCharacter>(GetPawn<APawn>())->GetAnimInstance()->JumpToNode();
 }
 

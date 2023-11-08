@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "PaperZDCharacter.h"
-#include "SCCharacterBase.generated.h"
+#include "GameFramework/PlayerState.h"
+#include "SCPlayerState.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
@@ -14,18 +14,14 @@ class UAttributeSet;
  * 
  */
 UCLASS()
-class SC_PROJECT_API ASCCharacterBase : public APaperZDCharacter, public IAbilitySystemInterface
+class SC_PROJECT_API ASCPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-
 public:
-	ASCCharacterBase();
+	ASCPlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
-
 protected:
-	virtual void BeginPlay() override;
-
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 

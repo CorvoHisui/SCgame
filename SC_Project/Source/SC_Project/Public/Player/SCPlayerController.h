@@ -16,8 +16,13 @@ UCLASS()
 class SC_PROJECT_API ASCPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
 public:
 	ASCPlayerController();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isMovementLocked = false;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -28,6 +33,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> JumpAction;
 
 	void Move(const struct FInputActionValue& InputActionValue);
 };

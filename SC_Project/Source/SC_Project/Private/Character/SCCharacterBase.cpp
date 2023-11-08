@@ -7,6 +7,11 @@ ASCCharacterBase::ASCCharacterBase()
 {
 }
 
+UAbilitySystemComponent* ASCCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void ASCCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
