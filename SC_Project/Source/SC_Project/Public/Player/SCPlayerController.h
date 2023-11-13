@@ -38,4 +38,5 @@ private:
 	TObjectPtr<UInputAction> JumpAction;
 
 	void Move(const struct FInputActionValue& InputActionValue);
+	void Jump();
 };

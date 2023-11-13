@@ -6,6 +6,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Character/SCCharacter.h"
+#include "PaperZDAnimInstance.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 ASCPlayerController::ASCPlayerController()
 {
@@ -37,6 +39,7 @@ void ASCPlayerController::SetupInputComponent()
 	UEnhancedInputComponent* EnhancedInputComonent = CastChecked<UEnhancedInputComponent>(InputComponent);
 
 	EnhancedInputComonent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
+	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASCPlayerController::Jump);
 
 }
 
@@ -55,7 +58,15 @@ void ASCPlayerController::Move(const FInputActionValue& InputActionValue)
 			ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 		}
 	}
+}
 
-	Cast<ASCCharacter>(GetPawn<APawn>())->GetAnimInstance()->JumpToNode();
+void ASCPlayerController::Jump()
+{
+	if (ASCCharacter* ControlledCharacter = GetPawn<ASCCharacter>()) {
+		ControlledCharacter->GetMovementComponent()->StopMovementImmediately();
+		isMovementLocked = true;
+
+		ControlledCharacter->GetAnimInstance()->JumpToNode("airborne");
+	}
 }
 
