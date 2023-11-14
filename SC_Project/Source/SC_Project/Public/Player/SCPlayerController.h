@@ -39,4 +39,5 @@ private:
 
 	void Move(const struct FInputActionValue& InputActionValue);
 	void Jump();
+	void StopJump();
 };

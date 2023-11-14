@@ -5,6 +5,9 @@
 
 #include "AbilitySystemComponent.h"
 #include "Player/SCPlayerState.h"
+#include "GameFramework/PawnMovementComponent.h"
+#include "PaperFlipbookComponent.h"
+#include "GameFramework/Actor.h"
 
 ASCCharacter::ASCCharacter()
 {
@@ -32,4 +35,16 @@ void ASCCharacter::InitAbilityActorInfo()
 	SCPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SCPlayerState, this);
 	AbilitySystemComponent = SCPlayerState->GetAbilitySystemComponent();
 	AttributeSet = SCPlayerState->GetAttributeSet();
+}
+
+void ASCCharacter::Tick(float DeltaSeconds)
+{
+
+}
+
+void ASCCharacter::RotateCharacter()
+{
+	if (GetMovementComponent()->Velocity.X > 0) {
+		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f), false, false);
+	}
 }

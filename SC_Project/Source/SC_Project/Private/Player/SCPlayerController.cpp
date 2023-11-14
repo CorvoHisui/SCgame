@@ -40,6 +40,7 @@ void ASCPlayerController::SetupInputComponent()
 
 	EnhancedInputComonent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
 	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASCPlayerController::Jump);
+	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASCPlayerController::Jump);
 
 }
 
@@ -67,6 +68,13 @@ void ASCPlayerController::Jump()
 		isMovementLocked = true;
 
 		ControlledCharacter->GetAnimInstance()->JumpToNode("airborne");
+	}
+}
+
+void ASCPlayerController::StopJump()
+{
+	if (ASCCharacter* ControlledCharacter = GetPawn<ASCCharacter>()) {
+		ControlledCharacter->StopJumping();
 	}
 }
 
