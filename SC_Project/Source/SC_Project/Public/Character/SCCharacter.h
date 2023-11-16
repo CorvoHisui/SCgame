@@ -17,8 +17,15 @@ public:
 	ASCCharacter();
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+
 private:
 	void InitAbilityActorInfo();
 	virtual void Tick(float DeltaSeconds);
 	void RotateCharacter();
+
+	float Divisor = 100.0f;
+	FVector GridSpawnPoint;
+	void SetGridSpawnPoint();
+	
+	void CenterGridToPlayer();
 };

@@ -9,6 +9,8 @@
 #include "PaperFlipbookComponent.h"
 #include "GameFramework/Actor.h"
 
+#include "Kismet/KismetMathLibrary.h"
+
 ASCCharacter::ASCCharacter()
 {
 }
@@ -39,12 +41,33 @@ void ASCCharacter::InitAbilityActorInfo()
 
 void ASCCharacter::Tick(float DeltaSeconds)
 {
+	Super::Tick(DeltaSeconds);
 
+	RotateCharacter();
 }
 
 void ASCCharacter::RotateCharacter()
 {
+	FHitResult Hit;
 	if (GetMovementComponent()->Velocity.X > 0) {
-		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f), false, false);
+		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f), false, Hit, false);
+	}
+	if (GetMovementComponent()->Velocity.X < 0) {
+		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f), false, Hit, false);
 	}
 }
+
+void ASCCharacter::SetGridSpawnPoint()
+{
+	float LocationX = GetActorLocation().X;
+	float LocationY = GetActorLocation().Y;
+	float LocationZ = GetActorLocation().Z;
+	float reminder;
+	GridSpawnPoint = UKismetMathLibrary::MakeVector(UKismetMathLibrary::FMod(LocationX, Divisor, reminder) * Divisor, UKismetMathLibrary::FMod(LocationY, Divisor, reminder) * Divisor, LocationZ - 44.0f);
+}
+
+void ASCCharacter::CenterGridToPlayer()
+{
+
+}
+
