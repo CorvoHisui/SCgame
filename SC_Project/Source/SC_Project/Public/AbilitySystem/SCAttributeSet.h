@@ -13,5 +13,10 @@ UCLASS()
 class SC_PROJECT_API USCAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
-	
+
+public:
+	USCAttributeSet();
+
+	//UPROPERTY(ReplicatedUsing = OnRep_Health)
+	//FGameplayAttributeData Health;
 };

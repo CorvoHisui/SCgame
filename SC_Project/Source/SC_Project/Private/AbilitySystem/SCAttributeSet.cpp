@@ -3,3 +3,6 @@
 
 #include "AbilitySystem/SCAttributeSet.h"
 
+USCAttributeSet::USCAttributeSet()
+{
+}

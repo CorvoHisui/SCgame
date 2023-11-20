@@ -48,12 +48,11 @@ void ASCCharacter::Tick(float DeltaSeconds)
 
 void ASCCharacter::RotateCharacter()
 {
-	FHitResult Hit;
 	if (GetMovementComponent()->Velocity.X > 0) {
-		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f), false, Hit, false);
+		GetSprite()->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
 	}
 	if (GetMovementComponent()->Velocity.X < 0) {
-		GetSprite()->K2_SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f), false, Hit, false);
+		GetSprite()->SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f));
 	}
 }
 

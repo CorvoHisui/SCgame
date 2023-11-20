@@ -19,7 +19,10 @@ public:
 	AGridSetUp();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UStaticMeshObject* MeshGridComponent;
+	class UStaticMesh* MeshGrid;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<class UStaticMeshComponent*> MeshGridComp;
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,5 +33,4 @@ private:
 	float GridY = 5.0f;
 	float GridSize = 100.0f;
 
-	
 };

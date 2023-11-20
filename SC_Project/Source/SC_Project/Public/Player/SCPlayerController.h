@@ -23,6 +23,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isMovementLocked = false;
 
+	FVector gridSpawnPosition;
+	float divisor = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class AActor* GridSetUp;
+
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -37,7 +44,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> JumpAction;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> GridAction;
+
 	void Move(const struct FInputActionValue& InputActionValue);
 	void Jump();
 	void StopJump();
+	void SpawnGrid();
 };
