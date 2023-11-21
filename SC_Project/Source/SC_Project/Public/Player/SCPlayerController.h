@@ -8,6 +8,7 @@
 
 class UInputMappingContext;
 class UInputAction;
+class AGridSetUp;
 
 /**
  * 
@@ -27,7 +28,7 @@ public:
 	float divisor = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class AActor* GridSetUp;
+	class AGridSetUp* GridSetUp;
 
 
 protected:
@@ -46,6 +47,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> GridAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "ActorSpawning")
+	TSubclassOf<AGridSetUp> GridSetActor;
 
 	void Move(const struct FInputActionValue& InputActionValue);
 	void Jump();

@@ -9,7 +9,7 @@
 #include "PaperZDAnimInstance.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include <Kismet/KismetMathLibrary.h>
-#include <Kismet/FVectorUKismetMathLibrary.h>
+#include <Grid/GridSetUp.h>
 
 ASCPlayerController::ASCPlayerController()
 {
@@ -43,7 +43,7 @@ void ASCPlayerController::SetupInputComponent()
 	EnhancedInputComonent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
 
 	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASCPlayerController::Jump);
-	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASCPlayerController::Jump);
+	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASCPlayerController::StopJump);
 
 	EnhancedInputComonent->BindAction(GridAction, ETriggerEvent::Started, this, &ASCPlayerController::SpawnGrid);
 
@@ -86,16 +86,19 @@ void ASCPlayerController::StopJump()
 void ASCPlayerController::SpawnGrid()
 {
 	if (ASCCharacter* ControlledCharacter = GetPawn<ASCCharacter>()) {
-		if (GridSetUp != NULL) {
+		if (GridSetUp) {
 
-			Destroy(GridSetUp);
-			GridSetUp = NULL;
-
+			GridSetUp->Destroy();
+			GridSetUp = nullptr;
 		}
 		else {
 			float reminder=0;
-			UKismetMathLibrary::FMod(ControlledCharacter->GetActorLocation().X, divisor, reminder)*divisor;
-			gridSpawnPosition = FVectorUKismetMathLibrary::MakeVector(UKismetMathLibrary::FMod(ControlledCharacter->GetActorLocation().X, divisor, reminder) * divisor, 0, 0);
+			
+			
+			FRotator Rotation(0.0f, 0.0f, 0.0f);
+			FActorSpawnParameters SpawnInfo;
+
+			GridSetUp = GetWorld()->SpawnActor<AGridSetUp>(GridSetActor, ControlledCharacter->GridSpawnPoint, Rotation, SpawnInfo);
 		}
 	}
 }

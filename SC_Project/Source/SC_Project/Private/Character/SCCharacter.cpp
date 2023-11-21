@@ -10,6 +10,8 @@
 #include "GameFramework/Actor.h"
 
 #include "Kismet/KismetMathLibrary.h"
+#include <Player/SCPlayerController.h>
+#include <Grid/GridSetUp.h>
 
 ASCCharacter::ASCCharacter()
 {
@@ -44,6 +46,13 @@ void ASCCharacter::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	RotateCharacter();
+
+	if (Cast<ASCPlayerController>(GetController())->GridSetUp) {
+		if ((UKismetMathLibrary::VSize(GetActorLocation() - FVector(0, 0, -46) - GridSpawnPoint))>50) {
+			CenterGridToPlayer();
+		}
+	}
+
 }
 
 void ASCCharacter::RotateCharacter()
@@ -62,11 +71,16 @@ void ASCCharacter::SetGridSpawnPoint()
 	float LocationY = GetActorLocation().Y;
 	float LocationZ = GetActorLocation().Z;
 	float reminder;
-	GridSpawnPoint = UKismetMathLibrary::MakeVector(UKismetMathLibrary::FMod(LocationX, Divisor, reminder) * Divisor, UKismetMathLibrary::FMod(LocationY, Divisor, reminder) * Divisor, LocationZ - 44.0f);
+	GridSpawnPoint = UKismetMathLibrary::MakeVector(UKismetMathLibrary::FMod(LocationX, Divisor, reminder) * Divisor,
+		UKismetMathLibrary::FMod(LocationY, Divisor, reminder) * Divisor,
+		LocationZ - 44.0f);
 }
 
 void ASCCharacter::CenterGridToPlayer()
 {
-
+	if (Cast<ASCPlayerController>(GetController())->GridSetUp) {
+		SetGridSpawnPoint();
+		Cast<ASCPlayerController>(GetController())->GridSetUp->SetActorLocation(GridSpawnPoint);
+	}
 }
 

@@ -32,16 +32,10 @@ AGridSetUp::AGridSetUp()
 	
 }
 
+
 // Called when the game starts or when spawned
 void AGridSetUp::BeginPlay()
 {
-//	FVector RelativeTransform = FVector((i * GridSize) - ((GridX - 1) * GridSize / 2), (j * GridSize) - ((GridX - 1) * GridSize / 2), 0.0f);
-
-	//AddComponent("MESH_Grid", false, UKismetMathLibrary::MakeTransform(RelativeTransform, FRotator(0, 0, 0), FVector(1, 1, 1)), MeshGrid, false);
-
-	
-
-
-	
+	Super::BeginPlay();
 }
 

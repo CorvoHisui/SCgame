@@ -15,6 +15,7 @@ class SC_PROJECT_API ASCCharacter : public ASCCharacterBase
 	GENERATED_BODY()
 public:
 	ASCCharacter();
+	FVector GridSpawnPoint;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
@@ -24,7 +25,6 @@ private:
 	void RotateCharacter();
 
 	float Divisor = 100.0f;
-	FVector GridSpawnPoint;
 	void SetGridSpawnPoint();
 	
 	void CenterGridToPlayer();
