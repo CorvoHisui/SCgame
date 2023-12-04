@@ -86,10 +86,10 @@ void ASCPlayerController::StopJump()
 void ASCPlayerController::SpawnGrid()
 {
 	if (ASCCharacter* ControlledCharacter = GetPawn<ASCCharacter>()) {
-		if (GridSetUp) {
+		if (GridSetActor) {
 
-			GridSetUp->Destroy();
-			GridSetUp = nullptr;
+			GridSetActor->Destroy();
+			GridSetActor = nullptr;
 		}
 		else {
 			float reminder=0;
@@ -98,7 +98,7 @@ void ASCPlayerController::SpawnGrid()
 			FRotator Rotation(0.0f, 0.0f, 0.0f);
 			FActorSpawnParameters SpawnInfo;
 
-			GridSetUp = GetWorld()->SpawnActor<AGridSetUp>(GridSetActor, ControlledCharacter->GridSpawnPoint, Rotation, SpawnInfo);
+			GridSetActor = GetWorld()->SpawnActor<AGridSetUp>(GridSetActorClass, ControlledCharacter->SetGridSpawnPoint(), Rotation, SpawnInfo);
 		}
 	}
 }

@@ -17,7 +17,7 @@ AGridSetUp::AGridSetUp()
 	{
 		for (int j = 0; j < GridY - 1; j++)
 		{
-			FVector RelativeTransform = FVector((i * GridSize) - ((GridX - 1) * GridSize / 2), (j * GridSize) - ((GridX - 1) * GridSize / 2), 0.0f);
+			FVector RelativeTransform = FVector(((i * GridSize) - ((GridX - 1) * GridSize / 2)) - GridOffsetX, ((j * GridSize) - ((GridX - 1) * GridSize / 2)) - GridOffsetY, 0.0f);
 
 			FString TileName = TEXT("Tile" + FString::FromInt(i) + FString::FromInt(j));
 			UStaticMeshComponent* Tile = CreateDefaultSubobject<UStaticMeshComponent>(FName(*TileName));

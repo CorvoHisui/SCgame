@@ -27,9 +27,8 @@ public:
 	FVector gridSpawnPosition;
 	float divisor = 100.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class AGridSetUp* GridSetUp;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ActorSpawning")
+	TObjectPtr<AGridSetUp> GridSetActor;
 
 protected:
 	virtual void BeginPlay() override;
@@ -49,7 +48,9 @@ private:
 	TObjectPtr<UInputAction> GridAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "ActorSpawning")
-	TSubclassOf<AGridSetUp> GridSetActor;
+	TSubclassOf<AGridSetUp> GridSetActorClass;
+
+	
 
 	void Move(const struct FInputActionValue& InputActionValue);
 	void Jump();

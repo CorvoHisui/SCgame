@@ -47,8 +47,8 @@ void ASCCharacter::Tick(float DeltaSeconds)
 
 	RotateCharacter();
 
-	if (Cast<ASCPlayerController>(GetController())->GridSetUp) {
-		if ((UKismetMathLibrary::VSize(GetActorLocation() - FVector(0, 0, -46) - GridSpawnPoint))>50) {
+	if (Cast<ASCPlayerController>(GetController())->GridSetActor) {
+		if (abs((UKismetMathLibrary::VSize(GetActorLocation() - FVector(0, 0, -46) - GridSpawnPoint))) > 50) {
 			CenterGridToPlayer();
 		}
 	}
@@ -65,7 +65,7 @@ void ASCCharacter::RotateCharacter()
 	}
 }
 
-void ASCCharacter::SetGridSpawnPoint()
+FVector ASCCharacter::SetGridSpawnPoint()
 {
 	float LocationX = GetActorLocation().X;
 	float LocationY = GetActorLocation().Y;
@@ -74,13 +74,13 @@ void ASCCharacter::SetGridSpawnPoint()
 	GridSpawnPoint = UKismetMathLibrary::MakeVector(UKismetMathLibrary::FMod(LocationX, Divisor, reminder) * Divisor,
 		UKismetMathLibrary::FMod(LocationY, Divisor, reminder) * Divisor,
 		LocationZ - 44.0f);
+	return GridSpawnPoint;
 }
 
 void ASCCharacter::CenterGridToPlayer()
 {
-	if (Cast<ASCPlayerController>(GetController())->GridSetUp) {
+	if (Cast<ASCPlayerController>(GetController())->GridSetActor) {
 		SetGridSpawnPoint();
-		Cast<ASCPlayerController>(GetController())->GridSetUp->SetActorLocation(GridSpawnPoint);
+		Cast<ASCPlayerController>(GetController())->GridSetActor->SetActorLocation(GridSpawnPoint);
 	}
 }
-

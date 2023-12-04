@@ -29,8 +29,11 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	float GridX = 5.0f;
-	float GridY = 5.0f;
+	float GridX = 6.0f;
+	float GridY = 6.0f;
 	float GridSize = 100.0f;
+
+	float GridOffsetX = 1.f;
+	float GridOffsetY = 1.0f;
 
 };
