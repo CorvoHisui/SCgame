@@ -9,6 +9,7 @@
 
 class UAbilitySystemComponent;
 class UAttributeSet;
+class USCAttributeSet;
 
 /**
  * 
@@ -20,11 +21,11 @@ class SC_PROJECT_API ASCPlayerState : public APlayerState, public IAbilitySystem
 public:
 	ASCPlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	USCAttributeSet* GetAttributeSet() const { return AttributeSet; }
 protected:
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	TObjectPtr<USCAttributeSet> AttributeSet;
 };

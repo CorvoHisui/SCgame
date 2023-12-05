@@ -11,7 +11,7 @@ ASCPlayerState::ASCPlayerState()
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 
-	AttributeSet = CreateDefaultSubobject<UAttributeSet>("AttributeSet");
+	AttributeSet = CreateDefaultSubobject<USCAttributeSet>("AttributeSet");
 
 	NetUpdateFrequency = 100.f;
 }

@@ -9,6 +9,7 @@
 
 class UAbilitySystemComponent;
 class UAttributeSet;
+class USCAttributeSet;
 
 /**
  * 
@@ -21,7 +22,7 @@ class SC_PROJECT_API ASCCharacterBase : public APaperZDCharacter, public IAbilit
 public:
 	ASCCharacterBase();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	USCAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
 	virtual void BeginPlay() override;
@@ -30,5 +31,5 @@ protected:
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	TObjectPtr<USCAttributeSet> AttributeSet;
 };

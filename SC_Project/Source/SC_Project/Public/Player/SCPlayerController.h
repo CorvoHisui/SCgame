@@ -21,7 +21,7 @@ class SC_PROJECT_API ASCPlayerController : public APlayerController
 public:
 	ASCPlayerController();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	bool isMovementLocked = false;
 
 	FVector gridSpawnPosition;
