@@ -20,6 +20,15 @@ ASCEffectActor::ASCEffectActor()
 
 }
 
+// Called when the game starts or when spawned
+void ASCEffectActor::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Sphere->OnComponentBeginOverlap.AddDynamic(this, &ASCEffectActor::OnOverlap);
+	Sphere->OnComponentEndOverlap.AddDynamic(this, &ASCEffectActor::EndOverlap);
+}
+
 void ASCEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, 
 	AActor* OtherActor, UPrimitiveComponent* OtherComp, 
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -40,15 +49,6 @@ void ASCEffectActor::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
-}
-
-// Called when the game starts or when spawned
-void ASCEffectActor::BeginPlay()
-{
-	Super::BeginPlay();
-	
-	Sphere->OnComponentBeginOverlap.AddDynamic(this, &ASCEffectActor::OnOverlap);
-	Sphere->OnComponentEndOverlap.AddDynamic(this, &ASCEffectActor::EndOverlap);
 }
 
 
