@@ -12,6 +12,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include <Player/SCPlayerController.h>
 #include <Grid/GridSetUp.h>
+#include "UI/HUD/SCHUD.h"
 
 ASCCharacter::ASCCharacter()
 {
@@ -39,6 +40,13 @@ void ASCCharacter::InitAbilityActorInfo()
 	SCPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SCPlayerState, this);
 	AbilitySystemComponent = SCPlayerState->GetAbilitySystemComponent();
 	AttributeSet = SCPlayerState->GetAttributeSet();
+
+	if (ASCPlayerController* SCPlayerController = Cast<ASCPlayerController>(GetController())) {
+		if (ASCHUD* SCHUD = Cast <ASCHUD>(SCPlayerController->GetHUD())) {
+			SCHUD->InitOverlay(SCPlayerController, SCPlayerState, AbilitySystemComponent, Cast<UAttributeSet>(AttributeSet));
+		}
+	}
+
 }
 
 void ASCCharacter::Tick(float DeltaSeconds)

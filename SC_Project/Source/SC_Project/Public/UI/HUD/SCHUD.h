@@ -7,6 +7,11 @@
 #include "SCHUD.generated.h"
 
 class USCUserWidget;
+class UOverlayWidgetController;
+class UAbilitySystemComponent;
+class UAttributeSet;
+struct FWidgetControllerParams;
+
 /**
  * 
  */
@@ -23,8 +28,11 @@ public:
 	UPROPERTY();
 	TObjectPtr<USCUserWidget> InventoryWidget;
 
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
+
+	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
+
 protected:
-	virtual void BeginPlay() override;
 	
 private:
 
@@ -33,4 +41,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<USCUserWidget> InventoryWidgetClass;
+
+	UPROPERTY();
+	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+
+	UPROPERTY(EditAnywhere);
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 };
