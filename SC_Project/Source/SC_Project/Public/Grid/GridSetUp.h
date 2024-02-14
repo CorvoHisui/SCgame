@@ -22,7 +22,7 @@ public:
 	class UStaticMesh* MeshGrid;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<class UStaticMeshComponent*> MeshGridComp;
+	TArray<class UStaticMeshComponent*> MeshGridComp;
 
 protected:
 	// Called when the game starts or when spawned
