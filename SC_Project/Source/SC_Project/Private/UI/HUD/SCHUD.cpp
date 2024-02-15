@@ -24,18 +24,20 @@ void ASCHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystem
 	//OverlayWidget = CreateWidget<USCUserWidget>(GetWorld(), OverlayWidgetClass);
 	//OverlayWidget->AddToViewport();
 
-	//InventoryWidget = CreateWidget<USCUserWidget>(GetWorld(), InventoryWidgetClass);
-	//InventoryWidget->AddToViewport();
+	
 
-	UUserWidget* widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
-	OverlayWidget = Cast<USCUserWidget>(widget);
+	UUserWidget* overlaywidget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	OverlayWidget = Cast<USCUserWidget>(overlaywidget);
 	
 	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
 	WidgetController->BroadcastInitialValues();
-	widget->AddToViewport();
+	overlaywidget->AddToViewport();
 
+	InventoryWidget = CreateWidget<USCUserWidget>(GetWorld(), InventoryWidgetClass);
+	InventoryWidget->AddToViewport();
+	
 }
 
