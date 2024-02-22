@@ -39,14 +39,15 @@ void ASCPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	UEnhancedInputComponent* EnhancedInputComonent = CastChecked<UEnhancedInputComponent>(InputComponent);
+	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
 
-	EnhancedInputComonent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
+	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
+	EnhancedInputComponent->BindAction(ControllerMoveAction, ETriggerEvent::Triggered, this, &ASCPlayerController::Move);
 
-	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASCPlayerController::Jump);
-	EnhancedInputComonent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASCPlayerController::StopJump);
+	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASCPlayerController::Jump);
+	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASCPlayerController::StopJump);
 
-	EnhancedInputComonent->BindAction(GridAction, ETriggerEvent::Started, this, &ASCPlayerController::SpawnGrid);
+	EnhancedInputComponent->BindAction(GridAction, ETriggerEvent::Started, this, &ASCPlayerController::SpawnGrid);
 
 }
 

@@ -42,6 +42,9 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> ControllerMoveAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> JumpAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
