@@ -3,6 +3,7 @@
 
 #include "Actor/SCEffectActor.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/SCAttributeSet.h"
 #include "Components/SphereComponent.h"
@@ -11,44 +12,27 @@
 ASCEffectActor::ASCEffectActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
-	SetRootComponent(Mesh);
-
-	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
-	Sphere->SetupAttachment(GetRootComponent());
-
 }
 
 // Called when the game starts or when spawned
 void ASCEffectActor::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Sphere->OnComponentBeginOverlap.AddDynamic(this, &ASCEffectActor::OnOverlap);
-	Sphere->OnComponentEndOverlap.AddDynamic(this, &ASCEffectActor::EndOverlap);
 }
 
-void ASCEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, 
-	AActor* OtherActor, UPrimitiveComponent* OtherComp, 
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ASCEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
-	//TODO: Cange this to use gameplay effect
-	if (IAbilitySystemInterface* ASCIntreface = Cast<IAbilitySystemInterface>(OtherActor))
-	{
-		const USCAttributeSet* SCAttributeSet = Cast<USCAttributeSet>(ASCIntreface->GetAbilitySystemComponent()->GetAttributeSet(USCAttributeSet::StaticClass()));
-		
-		//DO NOT DO THIS FIX LATER
-		USCAttributeSet* MutableSCAttributeSet = const_cast<USCAttributeSet*>(SCAttributeSet);
-		MutableSCAttributeSet->SetHealth(SCAttributeSet->GetHealth() + 8.f);
-		Destroy();
-	}
+	UAbilitySystemComponent *TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+
+	if(TargetASC == nullptr) return;
+
+	check(GameplayEffectClass);
+	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
+	EffectContextHandle.AddSourceObject(this);
+	
+	FGameplayEffectSpecHandle GameplayEffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.0f, EffectContextHandle);
+	TargetASC->ApplyGameplayEffectSpecToSelf(*GameplayEffectSpecHandle.Data.Get());
 }
 
-void ASCEffectActor::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
-}
 
 
