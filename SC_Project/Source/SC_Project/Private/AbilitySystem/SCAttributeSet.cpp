@@ -9,7 +9,7 @@ USCAttributeSet::USCAttributeSet()
 {
 	InitHealth(50.0f);
 	InitMaxHealth(100.0f);
-	InitStamina(100.0f);
+	InitStamina(50.0f);
 	InitMaxStamina(100.0f);
 }
 

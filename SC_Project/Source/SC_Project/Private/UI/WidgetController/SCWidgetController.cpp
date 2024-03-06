@@ -16,3 +16,8 @@ void USCWidgetController::BroadcastInitialValues()
 {
 
 }
+
+void USCWidgetController::BindCallbacksToDependencies()
+{
+	
+}
