@@ -25,6 +25,13 @@ public:
 	USCAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Apllied Efects")
+	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+
+protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY()

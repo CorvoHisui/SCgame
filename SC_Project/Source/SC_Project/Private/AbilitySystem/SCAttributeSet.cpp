@@ -4,6 +4,8 @@
 #include "AbilitySystem/SCAttributeSet.h"
 
 #include "Net/UnrealNetwork.h"
+#include "GameplayEffectExtension.h"
+#include "GameFramework/Character.h"
 
 USCAttributeSet::USCAttributeSet()
 {
@@ -21,6 +23,48 @@ void USCAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME_CONDITION_NOTIFY(USCAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USCAttributeSet, Stamina, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USCAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
+}
+
+void USCAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+
+	if(Attribute == GetHealthAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	}
+	if(Attribute == GetStaminaAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetStamina());
+	}
+}
+
+void USCAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+	//source = cause the effect, target = received the effect (owner of this AS)
+	
+	FGameplayEffectContextHandle EffectContextHandle = Data.EffectSpec.GetContext();
+	UAbilitySystemComponent* SourceAsc = EffectContextHandle.GetOriginalInstigatorAbilitySystemComponent();
+
+	//Source data
+	if(IsValid(SourceAsc) && SourceAsc->AbilityActorInfo.IsValid() && SourceAsc->AbilityActorInfo->AvatarActor.IsValid())
+	{
+		AActor* SourceAvatarActor = SourceAsc->AbilityActorInfo->AvatarActor.Get();
+		AController* SourceController = SourceAsc->AbilityActorInfo->PlayerController.Get();
+		if(SourceController==nullptr && SourceAvatarActor!=nullptr)
+		{
+			if(APawn* Pawn = Cast<APawn>(SourceAvatarActor))
+			{
+				SourceController = Pawn->GetController();
+			}
+		}
+		if(SourceController)
+		{
+			ACharacter* SourceCharacter = Cast<ACharacter>(SourceController->GetPawn());
+		}
+	}
+	//Add the if target data
 }
 
 void USCAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
