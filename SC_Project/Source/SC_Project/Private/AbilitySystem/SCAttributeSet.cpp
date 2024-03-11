@@ -35,7 +35,7 @@ void USCAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, fl
 	}
 	if(Attribute == GetStaminaAttribute())
 	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetStamina());
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxStamina());
 	}
 }
 
