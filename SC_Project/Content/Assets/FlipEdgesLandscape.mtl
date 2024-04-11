@@ -1,0 +1,18 @@
+newmtl 0
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Tr 0.000000
+illum 0
+Ns 0.000000
+map_Kd LandscapeTexture_0.png
+map_d LandscapeTexture_0.png
+newmtl 1
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Tr 0.000000
+illum 0
+Ns 0.000000
+map_Kd LandscapeTexture_1.png
+map_d LandscapeTexture_1.png
